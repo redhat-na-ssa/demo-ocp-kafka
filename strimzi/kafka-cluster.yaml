@@ -1,0 +1,137 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: controller
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  replicas: 1
+  resources:
+    requests:
+      memory: 16Gi
+      cpu: "4"
+    limits:
+      memory: 16Gi
+      cpu: "4"
+  roles:
+    - controller
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 50Gi
+        kraftMetadata: shared
+        deleteClaim: false
+  template:
+    pod:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchExpressions:
+                  - key: "strimzi.io/cluster"
+                    operator: In
+                    values:
+                      - "my-cluster"
+      topologySpreadConstraints:
+        - topologyKey: "topology.kubernetes.io/zone"
+          maxSkew: 1
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              strimzi.io/pool-name: "controller"
+---
+
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: broker
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  replicas: 3
+  resources:
+    requests:
+      memory: 32Gi
+      cpu: "12"
+    limits:
+      memory: 64Gi
+      cpu: "16"
+  roles:
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 100Gi
+        kraftMetadata: shared
+        deleteClaim: false
+  template:
+    pod:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchExpressions:
+                  - key: "strimzi.io/cluster"
+                    operator: In
+                    values:
+                      - "my-cluster"
+      topologySpreadConstraints:
+        - topologyKey: "topology.kubernetes.io/zone"
+          maxSkew: 1
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              strimzi.io/pool-name: "broker"
+---
+
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: my-cluster
+  annotations:
+    strimzi.io/node-pools: enabled
+    strimzi.io/kraft: enabled
+spec:
+  kafka:
+    version: 4.0.0
+    metadataVersion: 4.0-IV3
+    rack:
+      topologyKey: "topology.kubernetes.io/zone"
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+      - name: external
+        port: 9094
+        type: route
+        tls: true
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+      replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: kafka-metrics-config
+          key: config-yaml
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"

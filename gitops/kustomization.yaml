@@ -2,5 +2,22 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - operators/prometheus/operator/overlays/beta
+  - operators/grafana-operator
+  - operators/prometheus
   - operators/strimzi-kafka-operator/operator/overlays/stable
+  - operators/web-terminal
+
+components:
+  - instance/grafana
+  - instance/prometheus
+  - instance/strimzi
+
+patches:
+  - target:
+      kind: OperatorGroup
+      name: grafana-operator
+    patch: |-
+      - op: replace
+        path: /spec/targetNamespaces
+        value:
+          - strimzi-metrics

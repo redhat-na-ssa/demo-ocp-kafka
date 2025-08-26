@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-setup-autoscale
+spec:
+  template:
+    spec:
+      containers:
+      - name: minion
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MACHINE_MIN
+          value: "2"
+        - name: MACHINE_MAX
+          value: "8"

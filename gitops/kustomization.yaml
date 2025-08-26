@@ -8,6 +8,7 @@ resources:
   - operators/web-terminal
 
 components:
+  - instance/autoscale
   - instance/grafana
   - instance/prometheus
   - instance/strimzi

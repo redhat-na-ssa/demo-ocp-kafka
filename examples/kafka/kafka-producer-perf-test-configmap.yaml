@@ -11,5 +11,5 @@ data:
   num-records: "9223372036854775807"
   kafka-producer.properties: |
     batch.size=16384
-    bootstrap.servers=my-cluster-kafka-bootstrap.streams:9092
+    bootstrap.servers=my-cluster-kafka-bootstrap.strimzi:9092
     compression.type=snappy

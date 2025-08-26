@@ -25,7 +25,7 @@ until oc apply -k gitops; do : ; done
 oc apply -k example/kafka
 
 # scale example
-oc -n strimzi scale deploy kafka-consumer-perf-test replicas=1
+oc -n strimzi scale deploy kafka-consumer-perf-test --replicas=1
 oc -n strimzi scale deployment kafka-producer-perf-test --replicas=1
 ```
 

@@ -7,7 +7,7 @@ metadata:
 data:
   topic: "demo.topic01"
   messages: "9223372036854775807"
-  bootstrap-server: "my-cluster-kafka-bootstrap.streams:9092"
+  bootstrap-server: "my-cluster-kafka-bootstrap.strimzi:9092"
   kafka-consumer.properties: |
     compression.type=snappy
     fetch.max.bytes=52428800

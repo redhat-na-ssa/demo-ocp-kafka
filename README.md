@@ -24,7 +24,7 @@ until oc apply -k demo/on-osd; do : ; done
 
 ```sh
 # deploy example
-oc apply -k examples/kafka
+oc apply -k example
 
 # scale example
 oc -n strimzi scale deploy kafka-consumer-perf-test --replicas=1

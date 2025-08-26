@@ -7,6 +7,5 @@ kind: Component
 #     app: strimzi
 
 resources:
-  - kafka-cluster.yaml
-  - kafka-metrics-config.yaml
-  - namespace.yaml
+  - mirror-maker-cluster.yaml
+  - mirror-maker-metrics-config.yaml

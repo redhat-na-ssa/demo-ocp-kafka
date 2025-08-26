@@ -1,15 +1,33 @@
 # Strimzi Demo
 
+## Prerequisites - Get a cluster
+
+- OpenShift 4.18+
+  - role: `cluster-admin`
+
+[Red Hat Demo Platform](https://demo.redhat.com) Options (Tested)
+
+NOTE: The node sizes below are the **recommended minimum** to select for provisioning
+
+- <a href="https://demo.redhat.com/catalog?item=babylon-catalog-prod/sandboxes-gpte.sandbox-ocp.prod&utm_source=webapp&utm_medium=share-link" target="_blank">AWS with OpenShift Open Environment</a>
+  - 1 x Control Plane - `m6a.2xlarge`
+  - 0 x Workers - `m6a.4xlarge`
+
+## Set up Cluster
+
+```sh
+until oc apply -k gitops; do : ; done
+```
+<!-- 
 ## Pre-requisites
 
 Install the Strimzi operator. This can be done within your target namespace(s) (ie, 'strimzi''), or globally across all namespaces.
 
 Install the Prometheus operator. This can be done within your target namespace (ie, 'strimzi-metrics'), or globally across all namespaces.
 
-Install the Grafana operator. This can be done within your target namespace (ie, 'strimzi-metrics'), or globally across all namespaces.
+Install the Grafana operator. This can be done within your target namespace (ie, 'strimzi-metrics'), or globally across all namespaces. -->
 
-## Set up Cluster
-
+<!-- 
 __Environment__
 
 ```
@@ -74,4 +92,4 @@ oc -n strimzi create secret generic mirror-maker-trusted-certs --from-file=sourc
 # Create the Mirror Maker cluster
 oc -n strimzi apply -f ./mirror-maker-metrics-config.yaml
 oc -n strimzi apply -f ./mirror-maker-cluster.yaml
-```
+``` -->

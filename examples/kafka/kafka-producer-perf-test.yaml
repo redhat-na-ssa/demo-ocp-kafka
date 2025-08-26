@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: "kafka-producer-perf-test"
-          image: "registry.redhat.io/amq-streams/kafka-38-rhel9:2.8.0"
+          image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
           env:
             - name: "KAFKA_PRODUCER_PERF_TEST_THROUGHPUT"
               valueFrom:

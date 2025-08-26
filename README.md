@@ -16,8 +16,23 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 ## Set up Cluster
 
 ```sh
+# deploy demo
 until oc apply -k gitops; do : ; done
 ```
+
+```sh
+# deploy example
+oc apply -k example/kafka
+
+# scale example
+oc -n strimzi scale deploy kafka-consumer-perf-test replicas=1
+oc -n strimzi scale deployment kafka-producer-perf-test --replicas=1
+```
+
+## Links
+
+- https://github.com/joshdreagan/kafka-load-test
+
 <!-- 
 ## Pre-requisites
 

@@ -12,6 +12,8 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 - <a href="https://demo.redhat.com/catalog?item=babylon-catalog-prod/sandboxes-gpte.sandbox-ocp.prod&utm_source=webapp&utm_medium=share-link" target="_blank">AWS with OpenShift Open Environment</a>
   - 1 x Control Plane - `m6a.2xlarge`
   - 0 x Workers - `m6a.4xlarge`
+- <a href="https://catalog.demo.redhat.com/catalog?item=babylon-catalog-prod/openshift-cnv.ocp4-cnv-gitops.prod&utm_source=webapp&utm_medium=share-link" target="_blank">OpenShift GitOps Blank Environment</a>
+  - 3 x Control Plane - `16 cores`, `64Gi`
 
 ## Set up Cluster
 

@@ -19,7 +19,7 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 
 ```sh
 # deploy demo
-until oc apply -k gitops; do : ; done
+until oc apply -k demo/on-osd; do : ; done
 ```
 
 ```sh

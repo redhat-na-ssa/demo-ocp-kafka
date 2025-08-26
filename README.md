@@ -24,7 +24,7 @@ until oc apply -k gitops; do : ; done
 
 ```sh
 # deploy example
-oc apply -k example/kafka
+oc apply -k examples/kafka
 
 # scale example
 oc -n strimzi scale deploy kafka-consumer-perf-test --replicas=1

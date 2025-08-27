@@ -8,6 +8,7 @@ resources:
   - operators/web-terminal
 
 components:
+  - branding
   - instance/autoscale
   - instance/grafana
   - instance/prometheus

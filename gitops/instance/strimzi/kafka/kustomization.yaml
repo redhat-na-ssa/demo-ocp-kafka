@@ -8,4 +8,6 @@ kind: Component
 
 resources:
   - kafka-cluster.yaml
+  - kafka-metrics-config.yaml
   - namespace.yaml
+  - users.yaml

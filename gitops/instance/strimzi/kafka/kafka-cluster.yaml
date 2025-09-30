@@ -129,6 +129,15 @@ spec:
       default.replication.factor: 4
       min.insync.replicas: 2
       replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: kafka-metrics-config
+          key: config-yaml
   entityOperator:
     topicOperator: {}
     userOperator: {}
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"

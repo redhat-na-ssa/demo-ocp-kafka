@@ -10,8 +10,8 @@ resources:
   - grafana-datasource.yaml
   - grafana-route.yaml
   - grafana.yaml
-  - streams-kafka-dashboard.yaml
-  - streams-kafka-exporter-dashboard.yaml
-  - streams-kraft-dashboard.yaml
-  - streams-mirror-maker-dashboard.yaml
-  - streams-operators-dashboard.yaml
+  - kafka-dashboard.yaml
+  - kafka-exporter-dashboard.yaml
+  - kraft-dashboard.yaml
+  - mirror-maker-dashboard.yaml
+  - operators-dashboard.yaml

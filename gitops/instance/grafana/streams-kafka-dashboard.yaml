@@ -1,13 +1,13 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: strimzi-kafka-dashboard
-  namespace: strimzi-metrics
+  name: streams-kafka-dashboard
+  namespace: streams-metrics
 spec:
   resyncPeriod: 30s
   instanceSelector:
     matchLabels:
-      dashboards: "strimzi"
+      dashboards: "streams"
   json: >
     {
       "__requires": [

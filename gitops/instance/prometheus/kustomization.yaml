@@ -4,9 +4,9 @@ kind: Component
 # labels:
 # - includeSelectors: false
 #   pairs:
-#     app: strimzi
+#     app: streams
 
 resources:
   - prometheus-additional-scrape-secret.yaml
-  - prometheus-strimzi-pod-monitor.yaml
+  - prometheus-streams-pod-monitor.yaml
   - prometheus.yaml

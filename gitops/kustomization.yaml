@@ -22,4 +22,4 @@ patches:
       - op: replace
         path: /spec/targetNamespaces
         value:
-          - strimzi-metrics
+          - streams-metrics

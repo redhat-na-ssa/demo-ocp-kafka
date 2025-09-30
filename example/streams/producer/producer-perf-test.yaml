@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: "kafka-producer-perf-test"
-          image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
+          image: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
           env:
             - name: "KAFKA_PRODUCER_PERF_TEST_THROUGHPUT"
               valueFrom:
@@ -38,11 +38,25 @@ spec:
                 configMapKeyRef:
                   name: "kafka-producer-perf-test-configmap"
                   key: "num-records"
+            - name: "KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "my-cluster-cluster-ca-cert"
+                  key: "ca.password"
+            - name: "KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "client-user"
+                  key: "user.password"
           command:
             - "/opt/kafka/bin/kafka-producer-perf-test.sh"
           args:
             - "--producer.config"
             - "/etc/config/kafka-producer.properties"
+            - "--property"
+            - "ssl.truststore.password=${KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD}"
+            - "--property"
+            - "ssl.keystore.password=${KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD}"
             - "--throughput"
             - "$(KAFKA_PRODUCER_PERF_TEST_THROUGHPUT)"
             - "--record-size"
@@ -56,6 +70,12 @@ spec:
             - name: "kafka-producer-perf-test-configmap-vol"
               mountPath: "/etc/config"
               readOnly: true
+            - name: "cluster-cert-vol"
+              mountPath: "/etc/secret/cluster-certs"
+              readOnly: true
+            - name: "user-cert-vol"
+              mountPath: "/etc/secret/user-certs"
+              readOnly: true
       volumes:
         - name: "kafka-producer-perf-test-configmap-vol"
           configMap:
@@ -63,3 +83,15 @@ spec:
             items:
               - key: "kafka-producer.properties"
                 path: "kafka-producer.properties"
+        - name: "cluster-cert-vol"
+          secret:
+            name: "my-cluster-cluster-ca-cert"
+            items:
+              - key: "ca.p12"
+                path: "ca.p12"
+        - name: "user-cert-vol"
+          secret:
+            name: "client-user"
+            items:
+              - key: "user.p12"
+                path: "user.p12"

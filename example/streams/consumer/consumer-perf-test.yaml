@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-consumer-perf-test
+  labels:
+    app: kafka-consumer-perf-test
+spec:
+  selector:
+    matchLabels:
+      app: kafka-consumer-perf-test
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: kafka-consumer-perf-test
+    spec:
+      containers:
+        - name: "kafka-consumer-perf-test"
+          image: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
+          env:
+            - name: "KAFKA_CONSUMER_PERF_TEST_TOPIC"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test-configmap"
+                  key: "topic"
+            - name: "KAFKA_CONSUMER_PERF_TEST_MESSAGES"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test-configmap"
+                  key: "messages"
+            - name: "KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test-configmap"
+                  key: "bootstrap-server"
+            - name: "KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "my-cluster-cluster-ca-cert"
+                  key: "ca.password"
+            - name: "KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "client-user"
+                  key: "user.password"
+          command:
+            - "/opt/kafka/bin/kafka-consumer-perf-test.sh"
+          args:
+            - "--consumer.config"
+            - "/etc/config/kafka-consumer.properties"
+            - "--property"
+            - "ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}"
+            - "--property"
+            - "ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}"
+            - "--messages"
+            - "$(KAFKA_CONSUMER_PERF_TEST_MESSAGES)"
+            - "--topic"
+            - "$(KAFKA_CONSUMER_PERF_TEST_TOPIC)"
+            - "--bootstrap-server"
+            - "$(KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER)"
+            - "--print-metrics"
+          volumeMounts:
+            - name: "kafka-consumer-perf-test-configmap-vol"
+              mountPath: "/etc/config"
+              readOnly: true
+            - name: "cluster-cert-vol"
+              mountPath: "/etc/secret/cluster-certs"
+              readOnly: true
+            - name: "user-cert-vol"
+              mountPath: "/etc/secret/user-certs"
+              readOnly: true
+      volumes:
+        - name: "kafka-consumer-perf-test-configmap-vol"
+          configMap:
+            name: "kafka-consumer-perf-test-configmap"
+            items:
+              - key: "kafka-consumer.properties"
+                path: "kafka-consumer.properties"
+        - name: "cluster-cert-vol"
+          secret:
+            name: "my-cluster-cluster-ca-cert"
+            items:
+              - key: "ca.p12"
+                path: "ca.p12"
+        - name: "user-cert-vol"
+          secret:
+            name: "client-user"
+            items:
+              - key: "user.p12"
+                path: "user.p12"

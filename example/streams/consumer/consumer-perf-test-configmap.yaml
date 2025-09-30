@@ -3,14 +3,17 @@ apiVersion: v1
 metadata:
   name: kafka-consumer-perf-test-configmap
   labels:
-    app: strimzi
+    app: kafka-consumer-perf-test
 data:
   topic: "demo.topic01"
   messages: "9223372036854775807"
-  bootstrap-server: "my-cluster-kafka-bootstrap.strimzi:9092"
+  bootstrap-server: "my-cluster-kafka-bootstrap.streams:9093"
   kafka-consumer.properties: |
     compression.type=snappy
     fetch.max.bytes=52428800
     fetch.min.bytes=1048576
     group.id=kafka-consumer-perf-test
     group.protocol=classic
+    security.protocol=SSL
+    ssl.truststore.location=/etc/secret/cluster/ca.p12
+    ssl.keystore.location=/etc/secret/user/user.p12

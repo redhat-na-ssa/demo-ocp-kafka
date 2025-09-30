@@ -33,11 +33,25 @@ spec:
                 configMapKeyRef:
                   name: "kafka-consumer-perf-test-configmap"
                   key: "bootstrap-server"
+            - name: "KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "my-cluster-cluster-ca-cert"
+                  key: "ca.password"
+            - name: "KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "client-user"
+                  key: "user.password"
           command:
             - "/opt/kafka/bin/kafka-consumer-perf-test.sh"
           args:
             - "--consumer.config"
             - "/etc/config/kafka-consumer.properties"
+            - "--property"
+            - "ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}"
+            - "--property"
+            - "ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}"
             - "--messages"
             - "$(KAFKA_CONSUMER_PERF_TEST_MESSAGES)"
             - "--topic"
@@ -49,6 +63,12 @@ spec:
             - name: "kafka-consumer-perf-test-configmap-vol"
               mountPath: "/etc/config"
               readOnly: true
+            - name: "cluster-cert-vol"
+              mountPath: "/etc/secret/cluster-certs"
+              readOnly: true
+            - name: "user-cert-vol"
+              mountPath: "/etc/secret/user-certs"
+              readOnly: true
       volumes:
         - name: "kafka-consumer-perf-test-configmap-vol"
           configMap:
@@ -56,3 +76,15 @@ spec:
             items:
               - key: "kafka-consumer.properties"
                 path: "kafka-consumer.properties"
+        - name: "cluster-cert-vol"
+          secret:
+            name: "my-cluster-cluster-ca-cert"
+            items:
+              - key: "ca.p12"
+                path: "ca.p12"
+        - name: "user-cert-vol"
+          secret:
+            name: "client-user"
+            items:
+              - key: "user.p12"
+                path: "user.p12"

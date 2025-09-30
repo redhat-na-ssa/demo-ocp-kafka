@@ -2,9 +2,9 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: Grafana
 metadata:
   name: grafana
-  namespace: strimzi-metrics
+  namespace: streams-metrics
   labels:
-    dashboards: "strimzi"
+    dashboards: "streams"
 spec:
   config:
     log:

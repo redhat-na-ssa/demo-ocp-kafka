@@ -4,14 +4,14 @@ kind: Component
 # labels:
 # - includeSelectors: false
 #   pairs:
-#     app: strimzi
+#     app: streams
 
 resources:
   - grafana-datasource.yaml
   - grafana-route.yaml
   - grafana.yaml
-  - strimzi-kafka-dashboard.yaml
-  - strimzi-kafka-exporter-dashboard.yaml
-  - strimzi-kraft-dashboard.yaml
-  - strimzi-mirror-maker-dashboard.yaml
-  - strimzi-operators-dashboard.yaml
+  - streams-kafka-dashboard.yaml
+  - streams-kafka-exporter-dashboard.yaml
+  - streams-kraft-dashboard.yaml
+  - streams-mirror-maker-dashboard.yaml
+  - streams-operators-dashboard.yaml

@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-producer-perf-test
+  labels:
+    app: kafka-producer-perf-test
+spec:
+  selector:
+    matchLabels:
+      app: kafka-producer-perf-test
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: kafka-producer-perf-test
+    spec:
+      containers:
+        - name: "kafka-producer-perf-test"
+          image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
+          env:
+            - name: "KAFKA_PRODUCER_PERF_TEST_THROUGHPUT"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test-configmap"
+                  key: "throughput"
+            - name: "KAFKA_PRODUCER_PERF_TEST_RECORD_SIZE"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test-configmap"
+                  key: "record-size"
+            - name: "KAFKA_PRODUCER_PERF_TEST_TOPIC"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test-configmap"
+                  key: "topic"
+            - name: "KAFKA_PRODUCER_PERF_TEST_NUM_RECORDS"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test-configmap"
+                  key: "num-records"
+            - name: "KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "my-cluster-cluster-ca-cert"
+                  key: "ca.password"
+            - name: "KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "client-user"
+                  key: "user.password"
+          command:
+            - "/opt/kafka/bin/kafka-producer-perf-test.sh"
+          args:
+            - "--producer.config"
+            - "/etc/config/kafka-producer.properties"
+            - "--property"
+            - "ssl.truststore.password=${KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD}"
+            - "--property"
+            - "ssl.keystore.password=${KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD}"
+            - "--throughput"
+            - "$(KAFKA_PRODUCER_PERF_TEST_THROUGHPUT)"
+            - "--record-size"
+            - "$(KAFKA_PRODUCER_PERF_TEST_RECORD_SIZE)"
+            - "--topic"
+            - "$(KAFKA_PRODUCER_PERF_TEST_TOPIC)"
+            - "--num-records"
+            - "$(KAFKA_PRODUCER_PERF_TEST_NUM_RECORDS)"
+            - "--print-metrics"
+          volumeMounts:
+            - name: "kafka-producer-perf-test-configmap-vol"
+              mountPath: "/etc/config"
+              readOnly: true
+            - name: "cluster-cert-vol"
+              mountPath: "/etc/secret/cluster-certs"
+              readOnly: true
+            - name: "user-cert-vol"
+              mountPath: "/etc/secret/user-certs"
+              readOnly: true
+      volumes:
+        - name: "kafka-producer-perf-test-configmap-vol"
+          configMap:
+            name: "kafka-producer-perf-test-configmap"
+            items:
+              - key: "kafka-producer.properties"
+                path: "kafka-producer.properties"
+        - name: "cluster-cert-vol"
+          secret:
+            name: "my-cluster-cluster-ca-cert"
+            items:
+              - key: "ca.p12"
+                path: "ca.p12"
+        - name: "user-cert-vol"
+          secret:
+            name: "client-user"
+            items:
+              - key: "user.p12"
+                path: "user.p12"

@@ -1,13 +1,13 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: strimzi-mirror-maker-dashboard
-  namespace: strimzi-metrics
+  name: streams-mirror-maker-dashboard
+  namespace: streams-metrics
 spec:
   resyncPeriod: 30s
   instanceSelector:
     matchLabels:
-      dashboards: "strimzi"
+      dashboards: "streams"
   json: >
     {
       "__requires": [

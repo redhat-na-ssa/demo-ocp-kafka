@@ -1,12 +1,12 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDatasource
 metadata:
-  name: grafana-strimzi-datasource
-  namespace: strimzi-metrics
+  name: grafana-streams-datasource
+  namespace: streams-metrics
 spec:
   instanceSelector:
     matchLabels:
-      dashboards: "strimzi"
+      dashboards: "streams"
   datasource:
     name: prometheus
     type: prometheus

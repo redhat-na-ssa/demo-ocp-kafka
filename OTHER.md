@@ -16,3 +16,11 @@ Create the Mirror Maker cluster
 oc -n strimzi apply -f ./mirror-maker-metrics-config.yaml
 oc -n strimzi apply -f ./mirror-maker-cluster.yaml
 ```
+
+Test kustomize
+
+```sh
+oc kustomize example/streams/ > scratch/streams
+oc kustomize example/strimzi/ > scratch/strimzi
+diff -u scratch/{streams,strimzi} > scratch/diff.k
+```

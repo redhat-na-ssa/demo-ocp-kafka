@@ -78,13 +78,13 @@ spec:
                 path: "kafka-consumer.properties"
         - name: "cluster-cert-vol"
           secret:
-            name: "my-cluster-cluster-ca-cert"
+            secretName: "my-cluster-cluster-ca-cert"
             items:
               - key: "ca.p12"
                 path: "ca.p12"
         - name: "user-cert-vol"
           secret:
-            name: "client-user"
+            secretName: "client-user"
             items:
               - key: "user.p12"
                 path: "user.p12"

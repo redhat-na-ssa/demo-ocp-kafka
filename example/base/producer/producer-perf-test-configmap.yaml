@@ -14,5 +14,5 @@ data:
     bootstrap.servers=my-cluster-kafka-bootstrap.strimzi:9093
     compression.type=snappy
     security.protocol=SSL
-    ssl.truststore.location=/etc/secret/cluster/ca.p12
-    ssl.keystore.location=/etc/secret/user/user.p12
+    ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
+    ssl.keystore.location=/etc/secret/user-certs/user.p12

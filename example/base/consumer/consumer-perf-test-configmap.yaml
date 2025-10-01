@@ -15,5 +15,5 @@ data:
     group.id=kafka-consumer-perf-test
     group.protocol=classic
     security.protocol=SSL
-    ssl.truststore.location=/etc/secret/cluster/ca.p12
-    ssl.keystore.location=/etc/secret/user/user.p12
+    ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
+    ssl.keystore.location=/etc/secret/user-certs/user.p12

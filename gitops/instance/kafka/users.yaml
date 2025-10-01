@@ -39,3 +39,4 @@ spec:
     type: tls
   authorization:
     type: simple
+    acls: []

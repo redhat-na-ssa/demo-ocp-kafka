@@ -26,8 +26,14 @@ patches:
       name: kafka-producer-perf-test-configmap
     patch: |-
       - op: replace
-        path: /data/bootstrap-servers
-        value: "my-cluster-kafka-bootstrap.streams:9093"
+        path: /data/kafka-producer.properties
+        value: |-
+          batch.size=16384
+          bootstrap.servers=my-cluster-kafka-bootstrap.streams:9093
+          compression.type=snappy
+          security.protocol=SSL
+          ssl.truststore.location=/etc/secret/cluster/ca.p12
+          ssl.keystore.location=/etc/secret/user/user.p12
   - target:
       kind: Deployment
       name: kafka-producer-perf-test

@@ -3,23 +3,24 @@ kind: Kustomization
 
 resources:
   - banner-demo.yaml
-#   - ../../gitops/operators/grafana-operator
-#   - ../../gitops/operators/prometheus
+  - namespace.yaml
+  - ../../gitops/operators/grafana-operator
+  - ../../gitops/operators/prometheus
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
   - ../../gitops/operators/web-terminal
 
 components:
   - ../../gitops/branding
-#   - ../../gitops/instance/grafana
-#   - ../../gitops/instance/prometheus
-#   - ../../gitops/instance/strimzi
+  - ../../gitops/instance/grafana
+  # - ../../gitops/instance/prometheus
+  # - ../../gitops/instance/strimzi
 
-# patches:
-#   - target:
-#       kind: OperatorGroup
-#       name: grafana-operator
-#     patch: |-
-#       - op: replace
-#         path: /spec/targetNamespaces
-#         value:
-#           - streams-metrics
+patches:
+  - target:
+      kind: OperatorGroup
+      name: grafana-operator
+    patch: |-
+      - op: replace
+        path: /spec/targetNamespaces
+        value:
+          - strimzi-metrics

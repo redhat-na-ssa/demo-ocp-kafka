@@ -12,7 +12,6 @@ data:
     compression.type=snappy
     fetch.max.bytes=52428800
     fetch.min.bytes=1048576
-    group.id=kafka-consumer-perf-test
     group.protocol=classic
     security.protocol=SSL
     ssl.truststore.location=/etc/secret/cluster-certs/ca.p12

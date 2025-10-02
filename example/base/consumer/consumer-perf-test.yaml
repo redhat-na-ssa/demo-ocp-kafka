@@ -69,6 +69,8 @@ spec:
                 /opt/kafka/bin/kafka-consumer-perf-test.sh \
                   --consumer.config \
                     "/tmp/config" \
+                  --group \
+                    kafka-consumer-perf-test \
                   --messages \
                     "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
                   --topic \
@@ -76,6 +78,7 @@ spec:
                   --bootstrap-server \
                     "${KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER}" \
                   "--print-metrics"
+              
           volumeMounts:
             - name: "kafka-consumer-perf-test-configmap-vol"
               mountPath: "/etc/config"

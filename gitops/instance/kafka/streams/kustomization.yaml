@@ -4,7 +4,7 @@ kind: Component
 # labels:
 # - includeSelectors: false
 #   pairs:
-#     app: strimzi
+#     app: kafka
 
 resources:
   - kafka-cluster.yaml

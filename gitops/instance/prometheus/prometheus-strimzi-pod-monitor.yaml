@@ -4,14 +4,14 @@ metadata:
   name: cluster-operator-metrics
   namespace: strimzi-metrics
   labels:
-    app: streams
+    app: strimzi
 spec:
   selector:
     matchLabels:
       strimzi.io/kind: cluster-operator
   namespaceSelector:
     matchNames:
-      - streams
+      - strimzi
   podMetricsEndpoints:
   - path: /metrics
     port: http
@@ -22,14 +22,14 @@ metadata:
   name: entity-operator-metrics
   namespace: strimzi-metrics
   labels:
-    app: streams
+    app: strimzi
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: entity-operator
   namespaceSelector:
     matchNames:
-      - streams
+      - strimzi
   podMetricsEndpoints:
   - path: /metrics
     port: healthcheck
@@ -40,14 +40,14 @@ metadata:
   name: bridge-metrics
   namespace: strimzi-metrics
   labels:
-    app: streams
+    app: strimzi
 spec:
   selector:
     matchLabels:
       strimzi.io/kind: KafkaBridge
   namespaceSelector:
     matchNames:
-      - streams
+      - strimzi
   podMetricsEndpoints:
   - path: /metrics
     port: rest-api
@@ -58,7 +58,7 @@ metadata:
   name: kafka-resources-metrics
   namespace: strimzi-metrics
   labels:
-    app: streams
+    app: strimzi
 spec:
   selector:
     matchExpressions:
@@ -67,7 +67,7 @@ spec:
         values: ["Kafka", "KafkaConnect", "KafkaMirrorMaker2"]
   namespaceSelector:
     matchNames:
-      - streams
+      - strimzi
   podMetricsEndpoints:
   - path: /metrics
     port: tcp-prometheus

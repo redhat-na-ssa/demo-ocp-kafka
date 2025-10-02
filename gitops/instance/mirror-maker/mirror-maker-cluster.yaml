@@ -9,11 +9,11 @@ spec:
   version: 4.0.0
   rack:
     topologyKey: topology.kubernetes.io/zone
-  replicas: 2
+  replicas: 1
   connectCluster: "my-cluster-target"
   clusters:
     - alias: "my-cluster-source"
-      bootstrapServers: my-cluster-source-kafka-bootstrap-strimzi.apps.domain.com:443
+      bootstrapServers: my-cluster-kafka-bootstrap-strimzi.apps.demo.sandbox1495.opentlc.com:443
       tls:
         trustedCertificates:
           - secretName: "mirror-maker-source-cluster-certs"
@@ -25,7 +25,7 @@ spec:
           certificate: "mm-user.crt"
           key: "mm-user.key"
     - alias: "my-cluster-target"
-      bootstrapServers: my-cluster-target-kafka-bootstrap:9093
+      bootstrapServers: my-cluster-kafka-bootstrap:9093
       tls:
         trustedCertificates:
           - secretName: "my-cluster-cluster-ca-cert"
@@ -50,14 +50,17 @@ spec:
           replication.factor: -1
           offset-syncs.topic.replication.factor: -1
           sync.topic.acls.enabled: "false"
+          replication.policy.class: "org.apache.kafka.connect.mirror.IdentityReplicationPolicy"
       heartbeatConnector:
         config:
           # -1 means it will use the default replication factor configured in the broker
           heartbeats.topic.replication.factor: -1
+          replication.policy.class: "org.apache.kafka.connect.mirror.IdentityReplicationPolicy"
       checkpointConnector:
         config:
           # -1 means it will use the default replication factor configured in the broker
           checkpoints.topic.replication.factor: -1
+          replication.policy.class: "org.apache.kafka.connect.mirror.IdentityReplicationPolicy"
       topicsPattern: ".*"
       groupsPattern: ".*"
   metricsConfig:

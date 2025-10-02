@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: kafka-consumer-perf-test
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:

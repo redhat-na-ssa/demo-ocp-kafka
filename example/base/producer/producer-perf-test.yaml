@@ -48,24 +48,45 @@ spec:
                 secretKeyRef:
                   name: "client-user"
                   key: "user.password"
-          command:
-            - "/opt/kafka/bin/kafka-producer-perf-test.sh"
-          args:
-            - "--producer.config"
-            - "/etc/config/kafka-producer.properties"
-            - "--producer-props"
-            - "ssl.truststore.password=$(KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD)"
-            - "--producer-props"
-            - "ssl.keystore.password=$(KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD)"
-            - "--throughput"
-            - "$(KAFKA_PRODUCER_PERF_TEST_THROUGHPUT)"
-            - "--record-size"
-            - "$(KAFKA_PRODUCER_PERF_TEST_RECORD_SIZE)"
-            - "--topic"
-            - "$(KAFKA_PRODUCER_PERF_TEST_TOPIC)"
-            - "--num-records"
-            - "$(KAFKA_PRODUCER_PERF_TEST_NUM_RECORDS)"
-            - "--print-metrics"
+          command: 
+            - /bin/bash
+            - '-c'
+            - |
+              #!/bin/sh
+              # set -x
+
+              CONFIG="/etc/config/kafka-producer.properties"
+
+              kludge_config(){
+                CONFIG=${1:-$CONFIG}
+                cat ${CONFIG} > /tmp/config
+
+              echo "
+              ssl.truststore.password=${KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD}
+              ssl.keystore.password=${KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD}
+              " >> /tmp/config
+
+              # cat /tmp/config
+              }
+
+              run(){
+                /opt/kafka/bin/kafka-producer-perf-test.sh \
+                  --producer.config \
+                    "/tmp/config" \
+                  --throughput \
+                    "${KAFKA_PRODUCER_PERF_TEST_THROUGHPUT}" \
+                  --record-size \
+                    "${KAFKA_PRODUCER_PERF_TEST_RECORD_SIZE}" \
+                  --topic \
+                    "${KAFKA_PRODUCER_PERF_TEST_TOPIC}" \
+                  --num-records \
+                    "${KAFKA_PRODUCER_PERF_TEST_NUM_RECORDS}" \
+                  --print-metrics
+                }
+
+              kludge_config
+              run
+
           volumeMounts:
             - name: "kafka-producer-perf-test-configmap-vol"
               mountPath: "/etc/config"

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    openshift.io/display-name: "Strimzi"
+    openshift.io/display-name: "Streams"
   labels:
     openshift.io/cluster-monitoring: 'true'
-  name: strimzi
+  name: streams

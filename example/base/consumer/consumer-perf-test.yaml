@@ -81,11 +81,6 @@ spec:
 
               kludge_config
               run
-
-              while :
-              do
-                run
-              done
               
           volumeMounts:
             - name: "kafka-consumer-perf-test-configmap-vol"

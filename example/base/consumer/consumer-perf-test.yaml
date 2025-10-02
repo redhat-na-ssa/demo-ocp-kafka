@@ -64,13 +64,12 @@ spec:
               # cat /tmp/config
               }
 
-              kludge_config
-
+              run(){
                 /opt/kafka/bin/kafka-consumer-perf-test.sh \
                   --consumer.config \
                     "/tmp/config" \
                   --group \
-                    kafka-consumer-perf-test \
+                    client-group \
                   --messages \
                     "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
                   --topic \
@@ -78,6 +77,15 @@ spec:
                   --bootstrap-server \
                     "${KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER}" \
                   "--print-metrics"
+                }
+
+              kludge_config
+              run
+
+              while :
+              do
+                run
+              done
               
           volumeMounts:
             - name: "kafka-consumer-perf-test-configmap-vol"

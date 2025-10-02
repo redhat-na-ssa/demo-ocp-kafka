@@ -32,8 +32,8 @@ patches:
           bootstrap.servers=my-cluster-kafka-bootstrap.streams:9093
           compression.type=snappy
           security.protocol=SSL
-          ssl.truststore.location=/etc/secret/cluster/ca.p12
-          ssl.keystore.location=/etc/secret/user/user.p12
+          ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
+          ssl.keystore.location=/etc/secret/user/user-certs.p12
   - target:
       kind: Deployment
       name: kafka-producer-perf-test
@@ -47,4 +47,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/replicas
-        value: 4
+        value: 3

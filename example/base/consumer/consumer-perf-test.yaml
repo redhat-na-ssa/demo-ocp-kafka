@@ -48,20 +48,27 @@ spec:
             - '-c'
             - |
               #!/bin/sh
+              # set -x
+
+              CONFIG="/etc/config/kafka-consumer.properties"
 
               kludge_config(){
-                CONFIG="/etc/config/kafka-consumer.properties"
+                CONFIG=${1:-$CONFIG}
+                cat ${CONFIG} > /tmp/config
 
-                cp -a ${CONFIG} /tmp/$(basename ${CONFIG})
-                echo "
-                ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
-                ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
-                " >> /tmp/$(basename ${CONFIG})
+              echo "
+              ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
+              ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
+              " >> /tmp/config
+
+              # cat /tmp/config
               }
+
+              kludge_config
 
                 /opt/kafka/bin/kafka-consumer-perf-test.sh \
                   --consumer.config \
-                    "/tmp/kafka-consumer.properties" \
+                    "/tmp/config" \
                   --messages \
                     "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
                   --topic \

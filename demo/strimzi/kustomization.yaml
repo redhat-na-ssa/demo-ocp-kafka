@@ -5,14 +5,14 @@ resources:
   - banner-demo.yaml
   - namespace.yaml
   - ../../gitops/operators/grafana-operator
-  - ../../gitops/operators/prometheus
+  - ../../gitops/operators/prometheus/strimzi
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
   - ../../gitops/operators/web-terminal
 
 components:
   - ../../gitops/branding
   - ../../gitops/instance/grafana/strimzi
-  - ../../gitops/instance/prometheus
+  - ../../gitops/instance/prometheus/strimzi
   - ../../gitops/instance/kafka
 
 patches:

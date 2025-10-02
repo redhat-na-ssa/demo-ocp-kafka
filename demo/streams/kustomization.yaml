@@ -24,7 +24,6 @@ patches:
         path: /spec/targetNamespaces
         value:
           - streams-metrics
-patches:
   - target:
       kind: OperatorGroup
       name: prometheus

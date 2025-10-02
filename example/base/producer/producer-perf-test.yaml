@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: kafka-producer-perf-test
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -53,10 +53,10 @@ spec:
           args:
             - "--producer.config"
             - "/etc/config/kafka-producer.properties"
-            - "--property"
-            - "ssl.truststore.password=${KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD}"
-            - "--property"
-            - "ssl.keystore.password=${KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD}"
+            - "--producer-props"
+            - "ssl.truststore.password=$(KAFKA_PRODUCER_PERF_TEST_TRUSTSTORE_PASSWORD)"
+            - "--producer-props"
+            - "ssl.keystore.password=$(KAFKA_PRODUCER_PERF_TEST_KEYSTORE_PASSWORD)"
             - "--throughput"
             - "$(KAFKA_PRODUCER_PERF_TEST_THROUGHPUT)"
             - "--record-size"

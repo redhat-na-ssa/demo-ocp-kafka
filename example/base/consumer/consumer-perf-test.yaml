@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: kafka-consumer-perf-test
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -48,10 +48,10 @@ spec:
           args:
             - "--consumer.config"
             - "/etc/config/kafka-consumer.properties"
-            - "--property"
-            - "ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}"
-            - "--property"
-            - "ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}"
+            - "--consumer-props"
+            - "ssl.truststore.password=$(KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD)"
+            - "--consumer-props"
+            - "ssl.keystore.password=$(KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD)"
             - "--messages"
             - "$(KAFKA_CONSUMER_PERF_TEST_MESSAGES)"
             - "--topic"

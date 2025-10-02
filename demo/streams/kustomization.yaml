@@ -6,19 +6,28 @@ resources:
   - namespace.yaml
   - ../../gitops/operators/amq-streams/operator/overlays/stable
   - ../../gitops/operators/grafana-operator
-#   - ../../gitops/operators/prometheus
-  - ../../gitops/operators/web-terminal
+  - ../../gitops/operators/prometheus/streams
+  # - ../../gitops/operators/web-terminal
 
 components:
   - ../../gitops/branding
-  - ../../gitops/instance/grafana
-#   - ../../gitops/instance/prometheus
+  - ../../gitops/instance/grafana/streams
+  - ../../gitops/instance/prometheus/streams
 #   - ../../gitops/instance/kafka
 
 patches:
   - target:
       kind: OperatorGroup
       name: grafana-operator
+    patch: |-
+      - op: replace
+        path: /spec/targetNamespaces
+        value:
+          - streams-metrics
+patches:
+  - target:
+      kind: OperatorGroup
+      name: prometheus
     patch: |-
       - op: replace
         path: /spec/targetNamespaces

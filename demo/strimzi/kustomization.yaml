@@ -11,7 +11,7 @@ resources:
 
 components:
   - ../../gitops/branding
-  - ../../gitops/instance/grafana
+  - ../../gitops/instance/grafana/strimzi
   - ../../gitops/instance/prometheus
   - ../../gitops/instance/kafka
 

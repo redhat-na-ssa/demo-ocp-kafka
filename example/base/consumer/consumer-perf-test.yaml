@@ -43,22 +43,32 @@ spec:
                 secretKeyRef:
                   name: "client-user"
                   key: "user.password"
-          command:
-            - "/opt/kafka/bin/kafka-consumer-perf-test.sh"
-          args:
-            - "--consumer.config"
-            - "/etc/config/kafka-consumer.properties"
-            - "--consumer-props"
-            - "ssl.truststore.password=$(KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD)"
-            - "--consumer-props"
-            - "ssl.keystore.password=$(KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD)"
-            - "--messages"
-            - "$(KAFKA_CONSUMER_PERF_TEST_MESSAGES)"
-            - "--topic"
-            - "$(KAFKA_CONSUMER_PERF_TEST_TOPIC)"
-            - "--bootstrap-server"
-            - "$(KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER)"
-            - "--print-metrics"
+          command: 
+            - /bin/bash
+            - '-c'
+            - |
+              #!/bin/sh
+
+              kludge_config(){
+                CONFIG="/etc/config/kafka-consumer.properties"
+
+                cp -a ${CONFIG} /tmp/$(basename ${CONFIG})
+                echo "
+                ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
+                ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
+                " >> /tmp/$(basename ${CONFIG})
+              }
+
+                /opt/kafka/bin/kafka-consumer-perf-test.sh \
+                  --consumer.config \
+                    "/tmp/kafka-consumer.properties" \
+                  --messages \
+                    "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
+                  --topic \
+                    "${KAFKA_CONSUMER_PERF_TEST_TOPIC}" \
+                  --bootstrap-server \
+                    "${KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER}" \
+                  "--print-metrics"
           volumeMounts:
             - name: "kafka-consumer-perf-test-configmap-vol"
               mountPath: "/etc/config"

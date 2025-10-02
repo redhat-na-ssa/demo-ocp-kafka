@@ -8,5 +8,5 @@ kind: Component
 
 resources:
   - prometheus-additional-scrape-secret.yaml
-  - prometheus-strimzi-pod-monitor.yaml
+  - prometheus-pod-monitor.yaml
   - prometheus.yaml

@@ -24,3 +24,11 @@ patches:
         path: /spec/targetNamespaces
         value:
           - strimzi-metrics
+  - target:
+      kind: OperatorGroup
+      name: prometheus
+    patch: |-
+      - op: replace
+        path: /spec/targetNamespaces
+        value:
+          - strimzi-metrics

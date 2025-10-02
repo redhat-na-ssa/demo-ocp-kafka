@@ -12,7 +12,7 @@ data:
   kafka-producer.properties: |
     batch.size=16384
     bootstrap.servers=my-cluster-kafka-bootstrap.strimzi:9093
-    compression.type=snappy
+    compression.type=none
     security.protocol=SSL
     ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
     ssl.truststore.type=PKCS12

@@ -6,5 +6,5 @@ namespace: strimzi-metrics
 resources:
   - ../../../../gitops/operators/prometheus
   
-# components:
-#   - ../../gitops/instance/prometheus/strimzi
+components:
+  - ../../../../gitops/instance/prometheus/strimzi

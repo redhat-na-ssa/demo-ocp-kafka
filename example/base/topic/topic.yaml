@@ -6,7 +6,7 @@ metadata:
     strimzi.io/cluster: my-cluster
 spec:
   partitions: 100
-  replicas: 4
+  replicas: 1
   config:
     retention.ms: 300000
     segment.bytes: 1073741824

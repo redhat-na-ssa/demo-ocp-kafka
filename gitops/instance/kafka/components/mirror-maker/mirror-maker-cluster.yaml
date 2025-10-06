@@ -1,10 +1,9 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaMirrorMaker2
 metadata:
-  name: my-mm2-cluster
-  namespace: streams
   labels:
     app: my-mm2-cluster
+  name: my-mm2-cluster
 spec:
   version: 4.0.0
   rack:

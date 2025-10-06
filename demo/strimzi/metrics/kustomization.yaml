@@ -5,3 +5,12 @@ resources:
   - grafana
   - namespace.yaml
   # - prometheus
+
+patches:
+  - target:
+      kind: OperatorGroup
+    patch: |-
+      - op: replace
+        path: /spec/targetNamespaces
+        value:
+          - strimzi-metrics

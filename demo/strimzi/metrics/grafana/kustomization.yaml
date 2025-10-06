@@ -6,22 +6,3 @@ resources:
 
 components:
   - ../../../../gitops/instance/grafana/strimzi
-#   - ../../gitops/instance/prometheus/strimzi
-
-patches:
-  - target:
-      kind: OperatorGroup
-      name: grafana-operator
-    patch: |-
-      - op: replace
-        path: /spec/targetNamespaces
-        value:
-          - strimzi-metrics
-#   - target:
-#       kind: OperatorGroup
-#       name: prometheus
-#     patch: |-
-#       - op: replace
-#         path: /spec/targetNamespaces
-#         value:
-#           - strimzi-metrics

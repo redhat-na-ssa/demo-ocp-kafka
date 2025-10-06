@@ -4,4 +4,4 @@ metadata:
   name: prometheus
 spec:
   targetNamespaces:
-    - strimzi-metrics
+

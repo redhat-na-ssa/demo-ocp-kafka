@@ -13,6 +13,6 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: MACHINE_MIN
-          value: "2"
+          value: "1"
         - name: MACHINE_MAX
           value: "8"

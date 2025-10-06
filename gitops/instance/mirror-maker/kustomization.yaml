@@ -9,3 +9,4 @@ kind: Component
 resources:
   - mirror-maker-cluster.yaml
   - mirror-maker-metrics-config.yaml
+  - users.yaml

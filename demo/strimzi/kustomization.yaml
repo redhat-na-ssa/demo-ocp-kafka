@@ -7,7 +7,6 @@ resources:
   - ../../gitops/operators/grafana-operator
   - ../../gitops/operators/prometheus/strimzi
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
-  - ../../gitops/operators/web-terminal
 
 components:
   - ../../gitops/branding

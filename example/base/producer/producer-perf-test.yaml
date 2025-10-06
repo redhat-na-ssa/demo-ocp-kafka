@@ -112,9 +112,6 @@ spec:
         - name: "kafka-producer-perf-test-vol"
           configMap:
             name: "kafka-producer-perf-test"
-            # items:
-            #   - key: "kafka-producer.properties"
-            #     path: "kafka.properties"
         - name: "cluster-cert-vol"
           secret:
             secretName: "my-cluster-cluster-ca-cert"

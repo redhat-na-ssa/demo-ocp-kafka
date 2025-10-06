@@ -98,9 +98,6 @@ spec:
         - name: "kafka-consumer-perf-test-vol"
           configMap:
             name: "kafka-consumer-perf-test"
-            # items:
-            #   - key: "kafka-consumer.properties"
-            #     path: "kafka.properties"
         - name: "cluster-cert-vol"
           secret:
             secretName: "my-cluster-cluster-ca-cert"

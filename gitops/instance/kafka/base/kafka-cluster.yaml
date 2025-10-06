@@ -8,10 +8,10 @@ spec:
   replicas: 3
   resources:
     requests:
-      memory: 16Gi
+      memory: 8Gi
       cpu: "4"
     limits:
-      memory: 16Gi
+      memory: 8Gi
       cpu: "4"
   roles:
     - controller
@@ -53,11 +53,11 @@ spec:
   replicas: 4
   resources:
     requests:
-      memory: 32Gi
-      cpu: "12"
+      memory: 8Gi
+      cpu: "4"
     limits:
-      memory: 64Gi
-      cpu: "16"
+      memory: 8Gi
+      cpu: "4"
   roles:
     - broker
   storage:

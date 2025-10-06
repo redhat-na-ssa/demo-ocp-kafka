@@ -22,13 +22,7 @@ patches:
         path: /data/kafka-producer.properties
         value: |-
           batch.size=16384
-          bootstrap.servers=my-cluster-kafka-bootstrap:9093
           compression.type=snappy
-          security.protocol=SSL
-          ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
-          ssl.truststore.type=PKCS12
-          ssl.keystore.location=/etc/secret/user-certs/user.p12
-          ssl.keystore.type=PKCS12
   - target:
       kind: Deployment
       name: kafka-producer-perf-test
@@ -36,10 +30,10 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
-  - target:
-      kind: KafkaTopic
-      name: demo.topic01
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 3
+  # - target:
+  #     kind: KafkaTopic
+  #     name: demo.topic01
+  #   patch: |-
+  #     - op: replace
+  #       path: /spec/replicas
+  #       value: 3

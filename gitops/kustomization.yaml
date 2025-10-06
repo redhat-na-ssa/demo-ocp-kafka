@@ -9,8 +9,5 @@ labels:
     pairs:
       demo: demo-ocp-kafka
 
-resources:
-  - operators/web-terminal
-
 components:
   - branding

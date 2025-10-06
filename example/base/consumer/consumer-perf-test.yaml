@@ -70,14 +70,14 @@ spec:
                 /opt/kafka/bin/kafka-consumer-perf-test.sh \
                   --consumer.config \
                     "/tmp/config" \
-                  --group \
-                    client-group \
                   --messages \
                     "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
                   --topic \
                     "${KAFKA_CONSUMER_PERF_TEST_TOPIC}" \
                   --bootstrap-server \
                     "${KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER}" \
+                  --group client-group \
+                  --timeout 60 \
                   "--print-metrics"
                 }
 

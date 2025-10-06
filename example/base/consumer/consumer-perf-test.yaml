@@ -48,16 +48,20 @@ spec:
               #!/bin/sh
               # set -x
 
-              CONFIG="/etc/config/kafka-consumer.properties"
+              CONFIG="/etc/config/kafka.properties"
 
               kludge_config(){
                 CONFIG=${1:-$CONFIG}
                 cat ${CONFIG} > /tmp/config
 
+                if [-e "/etc/config/kafka.tls"]; then
+
               echo "
+              $(cat "/etc/config/kafka.tls")
               ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
               ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
               " >> /tmp/config
+                fi
 
               # cat /tmp/config
               }
@@ -96,7 +100,7 @@ spec:
             name: "kafka-consumer-perf-test-configmap"
             items:
               - key: "kafka-consumer.properties"
-                path: "kafka-consumer.properties"
+                path: "kafka.properties"
         - name: "cluster-cert-vol"
           secret:
             secretName: "my-cluster-cluster-ca-cert"

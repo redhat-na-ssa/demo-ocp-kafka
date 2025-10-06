@@ -8,13 +8,6 @@ resources:
 
 patches:
   - target:
-      kind: ConfigMap
-      name: kafka-consumer-perf-test-configmap
-    patch: |-
-      - op: replace
-        path: /data/bootstrap-server
-        value: "my-cluster-kafka-bootstrap.streams:9093"
-  - target:
       kind: Deployment
       name: kafka-consumer-perf-test
     patch: |-
@@ -33,7 +26,9 @@ patches:
           compression.type=snappy
           security.protocol=SSL
           ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
+          ssl.truststore.type=PKCS12
           ssl.keystore.location=/etc/secret/user-certs/user.p12
+          ssl.keystore.type=PKCS12
   - target:
       kind: Deployment
       name: kafka-producer-perf-test

@@ -13,3 +13,6 @@ patches:
           ssl.truststore.type=PKCS12
           ssl.keystore.location=/etc/secret/user-certs/user.p12
           ssl.keystore.type=PKCS12
+      - op: replace
+        path: /data/bootstrap-server
+        value: "my-cluster-kafka-bootstrap:9093"

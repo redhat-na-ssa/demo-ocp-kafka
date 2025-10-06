@@ -59,7 +59,7 @@ spec:
                 CONFIG=${1:-$CONFIG}
                 cat ${CONFIG} > /tmp/config
 
-                if [-e "/etc/config/kafka.tls"]; then
+                if [ -e "/etc/config/kafka.tls" ]; then
 
               echo "
               $(cat "/etc/config/kafka.tls")

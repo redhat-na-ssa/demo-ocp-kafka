@@ -48,7 +48,7 @@ spec:
               #!/bin/sh
               # set -x
 
-              CONFIG="/etc/config/kafka.properties"
+              CONFIG="/etc/config/kafka-consumer.properties"
 
               kludge_config(){
                 CONFIG=${1:-$CONFIG}

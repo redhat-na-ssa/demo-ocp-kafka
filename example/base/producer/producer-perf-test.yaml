@@ -53,7 +53,7 @@ spec:
               #!/bin/sh
               # set -x
 
-              CONFIG="/etc/config/kafka.properties"
+              CONFIG="/etc/config/kafka-producer.properties"
 
               kludge_config(){
                 CONFIG=${1:-$CONFIG}

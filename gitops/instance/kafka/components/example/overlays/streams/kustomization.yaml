@@ -22,7 +22,7 @@ patches:
         path: /data/kafka-producer.properties
         value: |-
           batch.size=16384
-          compression.type=snappy
+          compression.type=none
   - target:
       kind: Deployment
       name: kafka-producer-perf-test

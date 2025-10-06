@@ -2,7 +2,6 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
   name: client-user
-  namespace: kafka
   labels:
     strimzi.io/cluster: my-cluster
 spec:
@@ -33,7 +32,6 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
   name: mm-user
-  namespace: kafka
   labels:
     strimzi.io/cluster: my-cluster
 spec:

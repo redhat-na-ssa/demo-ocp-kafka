@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    openshift.io/display-name: "Kafka"
+    openshift.io/display-name: "Kafka Cluster"
   labels:
     openshift.io/cluster-monitoring: 'true'
   name: kafka

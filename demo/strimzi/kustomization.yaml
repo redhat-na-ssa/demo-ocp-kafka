@@ -13,9 +13,9 @@ resources:
   - banner-demo.yaml
   - namespace.yaml
   - ../../gitops/instance/kafka/overlays/default
-  # - ../../gitops/operators/grafana-operator
-  # - ../../gitops/operators/prometheus/strimzi
-  # - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
+  - ../../gitops/operators/grafana-operator
+  - ../../gitops/operators/prometheus/strimzi
+  - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
 
 components:
   - ../../gitops/branding

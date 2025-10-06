@@ -16,6 +16,11 @@ spec:
         - name: "kafka-consumer-perf-test"
           image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
           env:
+            - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test"
+                  key: "bootstrap-server"
             - name: "KAFKA_PERF_TEST_TOPIC"
               valueFrom:
                 configMapKeyRef:
@@ -26,11 +31,6 @@ spec:
                 configMapKeyRef:
                   name: "kafka-consumer-perf-test"
                   key: "messages"
-            - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
-              valueFrom:
-                configMapKeyRef:
-                  name: "kafka-consumer-perf-test"
-                  key: "bootstrap-server"
             - name: "KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD"
               valueFrom:
                 secretKeyRef:

@@ -16,6 +16,16 @@ spec:
         - name: "kafka-producer-perf-test"
           image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
           env:
+            - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test"
+                  key: "bootstrap-server"
+            - name: "KAFKA_PERF_TEST_TOPIC"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-producer-perf-test"
+                  key: "topic"
             - name: "KAFKA_PERF_TEST_THROUGHPUT"
               valueFrom:
                 configMapKeyRef:
@@ -26,11 +36,6 @@ spec:
                 configMapKeyRef:
                   name: "kafka-producer-perf-test"
                   key: "record-size"
-            - name: "KAFKA_PERF_TEST_TOPIC"
-              valueFrom:
-                configMapKeyRef:
-                  name: "kafka-producer-perf-test"
-                  key: "topic"
             - name: "KAFKA_PERF_TEST_NUM_RECORDS"
               valueFrom:
                 configMapKeyRef:

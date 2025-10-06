@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   annotations:
     openshift.io/display-name: "Strimzi Metrics"
-  name: strimzi-metrics
+  name: kafka-metrics

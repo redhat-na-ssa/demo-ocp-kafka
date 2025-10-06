@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: kafka-producer-perf-test
 data:
-  bootstrap-server: "my-cluster-kafka-bootstrap:9091"
+  bootstrap-server: "my-cluster-kafka-bootstrap:9092"
   num-records: "9223372036854775807"
   topic: "demo.topic01"
   throughput: "-1"

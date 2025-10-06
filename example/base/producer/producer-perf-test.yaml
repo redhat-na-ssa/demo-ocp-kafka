@@ -2,17 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-producer-perf-test
-  labels:
-    app: kafka-producer-perf-test
 spec:
   selector:
     matchLabels:
-      app: kafka-producer-perf-test
+      deploy: kafka-producer-perf-test
   replicas: 0
   template:
     metadata:
       labels:
-        app: kafka-producer-perf-test
+        deploy: kafka-producer-perf-test
     spec:
       containers:
         - name: "kafka-producer-perf-test"

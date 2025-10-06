@@ -1,6 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
+labels:
+  - includeSelectors: true
+    pairs:
+      app: kafka-producer-perf-test
+
 resources:
   - producer-perf-test-configmap.yaml
   - producer-perf-test.yaml

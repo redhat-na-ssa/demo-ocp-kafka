@@ -2,17 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-consumer-perf-test
-  labels:
-    app: kafka-consumer-perf-test
 spec:
   selector:
     matchLabels:
-      app: kafka-consumer-perf-test
+      deploy: kafka-consumer-perf-test
   replicas: 0
   template:
     metadata:
       labels:
-        app: kafka-consumer-perf-test
+        deploy: kafka-consumer-perf-test
     spec:
       containers:
         - name: "kafka-consumer-perf-test"

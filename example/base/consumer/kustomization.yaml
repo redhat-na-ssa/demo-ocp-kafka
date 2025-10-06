@@ -1,6 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
+labels:
+  - includeSelectors: true
+    pairs:
+      app: kafka-consumer-perf-test
+
 resources:
   - consumer-perf-test-configmap.yaml
   - consumer-perf-test.yaml

@@ -46,7 +46,7 @@ spec:
             - '-c'
             - |
               #!/bin/sh
-              # set -x
+              set -x
 
               CONFIG="/etc/config/kafka-consumer.properties"
 

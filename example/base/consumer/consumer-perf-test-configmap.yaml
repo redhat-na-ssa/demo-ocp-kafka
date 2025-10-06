@@ -3,16 +3,11 @@ apiVersion: v1
 metadata:
   name: kafka-consumer-perf-test
 data:
-  topic: "demo.topic01"
-  messages: "9223372036854775807"
   bootstrap-server: "my-cluster-kafka-bootstrap:9093"
+  messages: "9223372036854775807"
+  topic: "demo.topic01"
   kafka-consumer.properties: |
     compression.type=none
     fetch.max.bytes=52428800
     fetch.min.bytes=1048576
     group.protocol=classic
-    security.protocol=SSL
-    ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
-    ssl.truststore.type=PKCS12
-    ssl.keystore.location=/etc/secret/user-certs/user.p12
-    ssl.keystore.type=PKCS12

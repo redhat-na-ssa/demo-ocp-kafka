@@ -9,7 +9,7 @@ data:
   num-records: "9223372036854775807"
   kafka-producer.properties: |
     batch.size=16384
-    bootstrap.servers=my-cluster-kafka-bootstrap.strimzi:9093
+    bootstrap.servers=my-cluster-kafka-bootstrap:9093
     compression.type=none
     security.protocol=SSL
     ssl.truststore.location=/etc/secret/cluster-certs/ca.p12

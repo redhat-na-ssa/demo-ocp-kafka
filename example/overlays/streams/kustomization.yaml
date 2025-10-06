@@ -29,7 +29,7 @@ patches:
         path: /data/kafka-producer.properties
         value: |-
           batch.size=16384
-          bootstrap.servers=my-cluster-kafka-bootstrap.streams:9093
+          bootstrap.servers=my-cluster-kafka-bootstrap:9093
           compression.type=snappy
           security.protocol=SSL
           ssl.truststore.location=/etc/secret/cluster-certs/ca.p12

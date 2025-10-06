@@ -51,7 +51,7 @@ spec:
             - '-c'
             - |
               #!/bin/sh
-              # set -x
+              set -x
 
               CONFIG="/etc/config/kafka-producer.properties"
 
@@ -68,7 +68,7 @@ spec:
               " >> /tmp/config
                 fi
 
-              # cat /tmp/config
+              cat /tmp/config
               }
 
               run(){

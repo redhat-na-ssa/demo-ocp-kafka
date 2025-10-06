@@ -63,7 +63,7 @@ spec:
               " >> /tmp/config
                 fi
 
-              cat /tmp/config
+                cat /tmp/config
               }
 
               run(){
@@ -78,7 +78,7 @@ spec:
                     "${KAFKA_PERF_TEST_BOOTSTRAP_SERVER}" \
                   --group client-group \
                   --timeout 60000 \
-                  "--print-metrics"
+                  --print-metrics
                 }
 
               kludge_config

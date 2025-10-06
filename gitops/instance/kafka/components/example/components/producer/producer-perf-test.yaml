@@ -77,7 +77,7 @@ spec:
               " >> /tmp/config
                 fi
 
-              cat /tmp/config
+                cat /tmp/config
               }
 
               run(){

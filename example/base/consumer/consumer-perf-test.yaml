@@ -16,27 +16,27 @@ spec:
         - name: "kafka-consumer-perf-test"
           image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
           env:
-            - name: "KAFKA_CONSUMER_PERF_TEST_TOPIC"
+            - name: "KAFKA_PERF_TEST_TOPIC"
               valueFrom:
                 configMapKeyRef:
                   name: "kafka-consumer-perf-test"
                   key: "topic"
-            - name: "KAFKA_CONSUMER_PERF_TEST_MESSAGES"
+            - name: "KAFKA_PERF_TEST_MESSAGES"
               valueFrom:
                 configMapKeyRef:
                   name: "kafka-consumer-perf-test"
                   key: "messages"
-            - name: "KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER"
+            - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
               valueFrom:
                 configMapKeyRef:
                   name: "kafka-consumer-perf-test"
                   key: "bootstrap-server"
-            - name: "KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD"
+            - name: "KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD"
               valueFrom:
                 secretKeyRef:
                   name: "my-cluster-cluster-ca-cert"
                   key: "ca.password"
-            - name: "KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD"
+            - name: "KAFKA_PERF_TEST_KEYSTORE_PASSWORD"
               valueFrom:
                 secretKeyRef:
                   name: "client-user"
@@ -58,8 +58,8 @@ spec:
 
               echo "
               $(cat "/etc/config/kafka.tls")
-              ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
-              ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
+              ssl.truststore.password=${KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD}
+              ssl.keystore.password=${KAFKA_PERF_TEST_KEYSTORE_PASSWORD}
               " >> /tmp/config
                 fi
 
@@ -71,11 +71,11 @@ spec:
                   --consumer.config \
                     "/tmp/config" \
                   --messages \
-                    "${KAFKA_CONSUMER_PERF_TEST_MESSAGES}" \
+                    "${KAFKA_PERF_TEST_MESSAGES}" \
                   --topic \
-                    "${KAFKA_CONSUMER_PERF_TEST_TOPIC}" \
+                    "${KAFKA_PERF_TEST_TOPIC}" \
                   --bootstrap-server \
-                    "${KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER}" \
+                    "${KAFKA_PERF_TEST_BOOTSTRAP_SERVER}" \
                   --group client-group \
                   --timeout 60000 \
                   "--print-metrics"

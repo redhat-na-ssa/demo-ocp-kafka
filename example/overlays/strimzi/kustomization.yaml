@@ -3,5 +3,8 @@ kind: Component
 
 namespace: kafka
 
+components:
+  - components/tls
+
 resources:
   - ../../base

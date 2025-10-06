@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ../../../../gitops/operators/grafana-operator
 
-# components:
-#   - ../../gitops/instance/grafana/strimzi
+components:
+  - ../../gitops/instance/grafana/strimzi
 #   - ../../gitops/instance/prometheus/strimzi
 
 # patches:

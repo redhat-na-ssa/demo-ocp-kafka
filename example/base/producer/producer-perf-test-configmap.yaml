@@ -10,5 +10,4 @@ data:
   record-size: "64000"
   kafka-producer.properties: |
     batch.size=16384
-    bootstrap.servers=my-cluster-kafka-bootstrap:9091
     compression.type=none

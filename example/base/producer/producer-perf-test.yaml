@@ -64,6 +64,10 @@ spec:
                 CONFIG=${1:-$CONFIG}
                 cat ${CONFIG} > /tmp/config
 
+              echo "
+              bootstrap.servers="${KAFKA_PERF_TEST_BOOTSTRAP_SERVER:-my-cluster-kafka-bootstrap:9091}
+              " >> /tmp/config
+
                 if [ -e "/etc/config/kafka.tls" ]; then
 
               echo "

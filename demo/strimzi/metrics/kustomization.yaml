@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - grafana
   - namespace.yaml
-  - prometheus
+  # - prometheus

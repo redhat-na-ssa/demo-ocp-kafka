@@ -38,10 +38,10 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: prometheus-server
-    namespace: strimzi-metrics
+    namespace: kafka-metrics
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus-server
-  namespace: strimzi-metrics
+  namespace: kafka-metrics

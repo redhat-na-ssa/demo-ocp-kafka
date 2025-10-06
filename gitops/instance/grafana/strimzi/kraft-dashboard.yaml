@@ -2,7 +2,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: kraft-dashboard
-  namespace: strimzi-metrics
+  namespace: kafka-metrics
 spec:
   resyncPeriod: 30s
   instanceSelector:

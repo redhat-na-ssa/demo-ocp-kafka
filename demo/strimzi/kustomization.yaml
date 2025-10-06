@@ -11,6 +11,7 @@ labels:
 
 resources:
   - banner-demo.yaml
+  - metrics
   - ../../gitops/instance/kafka/overlays/default
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
 

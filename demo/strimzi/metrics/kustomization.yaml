@@ -13,4 +13,4 @@ patches:
       - op: replace
         path: /spec/targetNamespaces
         value:
-          - strimzi-metrics
+          - kafka-metrics

@@ -20,7 +20,7 @@ components:
   - ../../gitops/branding
   - ../../gitops/instance/grafana/strimzi
   - ../../gitops/instance/prometheus/strimzi
-  - ../../gitops/instance/kafka/strimzi
+  - ../../gitops/instance/kafka/overlays/strimzi
 
 patches:
   - target:

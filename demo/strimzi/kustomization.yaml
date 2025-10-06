@@ -11,7 +11,7 @@ labels:
 
 resources:
   - banner-demo.yaml
-  # - namespace.yaml
+  - namespace.yaml
   # - ../../gitops/operators/grafana-operator
   # - ../../gitops/operators/prometheus/strimzi
   # - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable

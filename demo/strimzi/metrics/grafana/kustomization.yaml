@@ -5,7 +5,7 @@ resources:
   - ../../../../gitops/operators/grafana-operator
 
 components:
-  - ../../gitops/instance/grafana/strimzi
+  - ../../../../gitops/instance/grafana/strimzi
 #   - ../../gitops/instance/prometheus/strimzi
 
 patches:

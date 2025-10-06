@@ -63,8 +63,8 @@ spec:
 
               echo "
               $(cat "/etc/config/kafka.tls")
-              ssl.truststore.password=${KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD}
-              ssl.keystore.password=${KAFKA_CONSUMER_PERF_TEST_KEYSTORE_PASSWORD}
+              ssl.truststore.password=${KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD}
+              ssl.keystore.password=${KAFKA_PERF_TEST_KEYSTORE_PASSWORD}
               " >> /tmp/config
                 fi
 

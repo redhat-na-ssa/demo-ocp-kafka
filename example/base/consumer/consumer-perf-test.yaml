@@ -19,17 +19,17 @@ spec:
             - name: "KAFKA_CONSUMER_PERF_TEST_TOPIC"
               valueFrom:
                 configMapKeyRef:
-                  name: "kafka-consumer-perf-test-configmap"
+                  name: "kafka-consumer-perf-test"
                   key: "topic"
             - name: "KAFKA_CONSUMER_PERF_TEST_MESSAGES"
               valueFrom:
                 configMapKeyRef:
-                  name: "kafka-consumer-perf-test-configmap"
+                  name: "kafka-consumer-perf-test"
                   key: "messages"
             - name: "KAFKA_CONSUMER_PERF_TEST_BOOTSTRAP_SERVER"
               valueFrom:
                 configMapKeyRef:
-                  name: "kafka-consumer-perf-test-configmap"
+                  name: "kafka-consumer-perf-test"
                   key: "bootstrap-server"
             - name: "KAFKA_CONSUMER_PERF_TEST_TRUSTSTORE_PASSWORD"
               valueFrom:
@@ -85,7 +85,7 @@ spec:
               run
               
           volumeMounts:
-            - name: "kafka-consumer-perf-test-configmap-vol"
+            - name: "kafka-consumer-perf-test-vol"
               mountPath: "/etc/config"
               readOnly: true
             - name: "cluster-cert-vol"
@@ -95,9 +95,9 @@ spec:
               mountPath: "/etc/secret/user-certs"
               readOnly: true
       volumes:
-        - name: "kafka-consumer-perf-test-configmap-vol"
+        - name: "kafka-consumer-perf-test-vol"
           configMap:
-            name: "kafka-consumer-perf-test-configmap"
+            name: "kafka-consumer-perf-test"
             # items:
             #   - key: "kafka-consumer.properties"
             #     path: "kafka.properties"

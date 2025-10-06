@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: kafka-consumer-perf-test-configmap
+  name: kafka-consumer-perf-test
 data:
   topic: "demo.topic01"
   messages: "9223372036854775807"

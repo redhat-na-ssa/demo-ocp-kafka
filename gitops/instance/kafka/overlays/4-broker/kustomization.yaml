@@ -22,8 +22,8 @@ patches:
         path: /spec/template/pod/topologySpreadConstraints/0/maxSkew
         value: 2
   - target:
-      kind: KafkaNodePool
-      name: broker
+      kind: Kafka
+      name: my-cluster
     patch: |-
       - op: replace
         path: /spec/kafka/config

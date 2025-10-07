@@ -28,6 +28,13 @@ oc -n strimzi scale deployment kafka-consumer-perf-test --replicas=1
 oc -n strimzi scale deployment kafka-producer-perf-test --replicas=1
 ```
 
+Reset kafka cluster
+
+```sh
+oc -n kafka delete kafkatopic demo.topic01
+oc delete ns kafka
+```
+
 ## Links
 
 - https://github.com/joshdreagan/kafka-load-test

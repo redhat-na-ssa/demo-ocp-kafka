@@ -24,8 +24,8 @@ until oc apply -k demo/strimzi; do : ; done
 
 ```sh
 # scale generator
-oc -n strimzi scale deployment kafka-consumer-perf-test --replicas=1
-oc -n strimzi scale deployment kafka-producer-perf-test --replicas=1
+oc -n kafka scale deployment kafka-consumer-perf-test --replicas=1
+oc -n kafka scale deployment kafka-producer-perf-test --replicas=1
 ```
 
 Reset kafka cluster

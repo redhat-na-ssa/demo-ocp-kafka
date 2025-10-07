@@ -27,15 +27,6 @@ spec:
   template:
     pod:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: "strimzi.io/cluster"
-                    operator: In
-                    values:
-                      - "my-cluster"
       topologySpreadConstraints:
         - topologyKey: "topology.kubernetes.io/zone"
           maxSkew: 1
@@ -72,15 +63,6 @@ spec:
   template:
     pod:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: "strimzi.io/cluster"
-                    operator: In
-                    values:
-                      - "my-cluster"
       topologySpreadConstraints:
         - topologyKey: "topology.kubernetes.io/zone"
           maxSkew: 1

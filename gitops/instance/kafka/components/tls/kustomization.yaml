@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+patches:
+  - target:
+      kind: ConfigMap
+    patch: |-
+      - op: add
+        path: /data/kafka.tls
+        value: |-
+          security.protocol=SSL
+          ssl.truststore.location=/etc/secret/cluster-certs/ca.p12
+          ssl.truststore.type=PKCS12
+          ssl.keystore.location=/etc/secret/user-certs/user.p12
+          ssl.keystore.type=PKCS12
+      - op: replace
+        path: /data/bootstrap-server
+        value: "my-cluster-kafka-bootstrap:9093"

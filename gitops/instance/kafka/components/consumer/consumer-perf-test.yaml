@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-consumer-perf-test
+spec:
+  selector:
+    matchLabels:
+      deploy: kafka-consumer-perf-test
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        deploy: kafka-consumer-perf-test
+    spec:
+      containers:
+        - name: "kafka-consumer-perf-test"
+          image: quay.io/strimzi/kafka:latest-kafka-4.0.0
+          env:
+            - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test"
+                  key: "bootstrap-server"
+            - name: "KAFKA_PERF_TEST_TOPIC"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test"
+                  key: "topic"
+            - name: "KAFKA_PERF_TEST_MESSAGES"
+              valueFrom:
+                configMapKeyRef:
+                  name: "kafka-consumer-perf-test"
+                  key: "messages"
+            - name: "KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "my-cluster-cluster-ca-cert"
+                  key: "ca.password"
+            - name: "KAFKA_PERF_TEST_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "client-user"
+                  key: "user.password"
+          command: 
+            - /bin/bash
+            - '-c'
+            - |
+              #!/bin/sh
+              # set -x
+
+              CONFIG="/etc/config/kafka-consumer.properties"
+
+              kludge_config(){
+                CONFIG=${1:-$CONFIG}
+                cat ${CONFIG} > /tmp/config
+
+                if [ -e "/etc/config/kafka.tls" ]; then
+
+              echo "
+              $(cat "/etc/config/kafka.tls")
+              ssl.truststore.password=${KAFKA_PERF_TEST_TRUSTSTORE_PASSWORD}
+              ssl.keystore.password=${KAFKA_PERF_TEST_KEYSTORE_PASSWORD}
+              " >> /tmp/config
+                fi
+
+                # cat /tmp/config
+              }
+
+              run(){
+                /opt/kafka/bin/kafka-consumer-perf-test.sh \
+                  --consumer.config \
+                    "/tmp/config" \
+                  --messages \
+                    "${KAFKA_PERF_TEST_MESSAGES}" \
+                  --topic \
+                    "${KAFKA_PERF_TEST_TOPIC}" \
+                  --bootstrap-server \
+                    "${KAFKA_PERF_TEST_BOOTSTRAP_SERVER}" \
+                  --group client-group \
+                  --timeout 60000 \
+                  --print-metrics
+                }
+
+              kludge_config
+              run
+              
+          volumeMounts:
+            - name: "kafka-consumer-perf-test-vol"
+              mountPath: "/etc/config"
+              readOnly: true
+            - name: "cluster-cert-vol"
+              mountPath: "/etc/secret/cluster-certs"
+              readOnly: true
+            - name: "user-cert-vol"
+              mountPath: "/etc/secret/user-certs"
+              readOnly: true
+      volumes:
+        - name: "kafka-consumer-perf-test-vol"
+          configMap:
+            name: "kafka-consumer-perf-test"
+        - name: "cluster-cert-vol"
+          secret:
+            secretName: "my-cluster-cluster-ca-cert"
+            items:
+              - key: "ca.p12"
+                path: "ca.p12"
+        - name: "user-cert-vol"
+          secret:
+            secretName: "client-user"
+            items:
+              - key: "user.p12"
+                path: "user.p12"

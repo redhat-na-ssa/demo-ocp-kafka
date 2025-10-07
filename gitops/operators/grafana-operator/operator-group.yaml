@@ -5,4 +5,4 @@ metadata:
   namespace: grafana-operator
 spec:
   targetNamespaces:
-    - grafana-operator
+  #   - grafana-operator

@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kafka-consumer-perf-test
+data:
+  bootstrap-server: "my-cluster-kafka-bootstrap:9092"
+  messages: "9223372036854775807"
+  topic: "demo.topic01"
+  kafka-consumer.properties: |
+    compression.type=none
+    fetch.max.bytes=52428800
+    fetch.min.bytes=1048576
+    group.protocol=classic

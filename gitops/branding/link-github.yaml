@@ -5,7 +5,7 @@ metadata:
 spec:
   href: 'https://github.com/redhat-na-ssa/demo-ocp-strimzi'
   location: ApplicationMenu
-  text: Demo - Strimzi
+  text: Demo - Kafka
   applicationMenu:
     section: Git Repos
     imageURL: /static/assets/public/imgs/logos/github.svg

@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - banner-demo.yaml
-  - kafka
   - ../base
   - ../../gitops/operators/amq-streams/operator/overlays/stable
 

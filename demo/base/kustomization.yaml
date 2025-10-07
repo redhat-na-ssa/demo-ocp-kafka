@@ -11,7 +11,7 @@ labels:
 
 resources:
   - generator
-  # - kafka
+  - kafka
   - metrics
 
 components:

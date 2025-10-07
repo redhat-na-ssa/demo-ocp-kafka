@@ -13,7 +13,7 @@ resources:
   - banner-demo.yaml
   - metrics
   - ../../gitops/instance/kafka/overlays/default
-  - ../../gitops/instance/kafka/components/example/overlays/strimzi-tls
+  - ../../gitops/instance/kafka/example/overlays/strimzi-tls
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
 
 components:

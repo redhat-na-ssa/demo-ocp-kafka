@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: "kafka-consumer-perf-test"
-          image: "quay.io/strimzi/kafka:latest-kafka-4.0.0"
+          image: quay.io/strimzi/kafka:latest-kafka-4.0.0
           env:
             - name: "KAFKA_PERF_TEST_BOOTSTRAP_SERVER"
               valueFrom:

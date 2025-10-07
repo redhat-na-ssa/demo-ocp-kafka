@@ -115,8 +115,8 @@ spec:
         port: 9093
         type: internal
         tls: true
-        authentication:
-          type: tls
+        # authentication:
+        #   type: tls
       - name: external
         port: 9094
         type: route

@@ -14,5 +14,17 @@ patches:
       kind: Kafka
     patch: |-
       - op: add
-        path: /spec/kafka/authorization/type
-        value: simple
+        path: /spec/kafka/listeners
+        value:
+          - name: tls
+            port: 9093
+            type: internal
+            tls: true
+            authentication:
+              type: tls
+          - name: external
+            port: 9094
+            type: route
+            tls: true
+            authentication:
+              type: tls

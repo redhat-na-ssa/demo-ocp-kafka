@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: kafka
 
 components:
-  - ../../components/pod-affinity
+  - ../../components/node-anti-affinity
   - ../../components/users
 
 resources:

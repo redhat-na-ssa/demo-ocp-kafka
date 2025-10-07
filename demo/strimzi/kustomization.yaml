@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - banner-demo.yaml
   - ../base
-  - ../../gitops/operators/strimzi-kafka-operator
+  - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable

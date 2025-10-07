@@ -51,7 +51,7 @@ metadata:
   labels:
     strimzi.io/cluster: my-cluster
 spec:
-  replicas: 4
+  replicas: 3
   resources:
     requests:
       memory: 8Gi
@@ -83,7 +83,7 @@ spec:
                       - "my-cluster"
       topologySpreadConstraints:
         - topologyKey: "topology.kubernetes.io/zone"
-          maxSkew: 2
+          maxSkew: 1
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:

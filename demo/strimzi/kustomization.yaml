@@ -5,3 +5,22 @@ resources:
   - banner-demo.yaml
   - ../base
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
+
+patches:
+  - target:
+      kind: KafkaTopic
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 4
+  - target:
+      kind: KafkaNodePool
+      name: broker
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 4
+    patch: |-
+      - op: replace
+        path: /spec/template/pod/topologySpreadConstraints/0/maxSkew
+        value: 2

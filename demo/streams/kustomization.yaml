@@ -3,13 +3,8 @@ kind: Kustomization
 
 resources:
   - banner-demo.yaml
-  - metrics
-  - generator
-  - ../../gitops/instance/kafka/overlays/default
+  - ../base
   - ../../gitops/operators/amq-streams/operator/overlays/stable
-
-components:
-  - ../../gitops/branding
 
 # patches:
 #   - target:

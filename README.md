@@ -15,13 +15,17 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 - <a href="https://catalog.demo.redhat.com/catalog?item=babylon-catalog-prod/sandboxes-gpte.ocp-wksp.prod&utm_source=webapp&utm_medium=share-link" target="_blank">Red Hat OpenShift Container Platform Cluster (AWS)</a>
   - 3 x Control Plane
 
-## Set up Cluster
+## Quick Start
 
-Run AMQ Streams Demo
+```sh
+scripts/bootstrap.sh
+```
+
+## Run AMQ Streams Demo
 
 ```sh
 # deploy demo
-until oc apply -k demo/streams do : ; done
+until oc apply -k demo/streams; do : ; done
 ```
 
 ## Scale Consumer / Producer
@@ -34,17 +38,10 @@ oc -n kafka scale deployment kafka-producer-perf-test --replicas=1
 
 ## Remove Demo
 
+See [uninstall.sh](scripts/uninstall.sh)
+
 ```sh
-# remove kafka cluster
-oc -n kafka delete kafkatopic demo.topic01
-oc delete ns kafka
-
-# remove demo
-oc delete -k demo/streams
-oc delete -k demo/strimzi
-
-# remove CRDs
-oc delete crd -l app=strimzi
+scripts/uninstall.sh
 ```
 
 ## Links

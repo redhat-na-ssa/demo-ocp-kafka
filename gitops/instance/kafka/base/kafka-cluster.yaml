@@ -38,7 +38,7 @@ spec:
                       - "my-cluster"
       topologySpreadConstraints:
         - topologyKey: "topology.kubernetes.io/zone"
-          maxSkew: 2
+          maxSkew: 1
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:

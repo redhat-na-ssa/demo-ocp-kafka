@@ -14,6 +14,9 @@ patches:
       kind: Kafka
     patch: |-
       - op: add
+        path: /spec/kafka/authorization/type
+        value: simple
+      - op: add
         path: /spec/kafka/listeners
         value:
           - name: tls

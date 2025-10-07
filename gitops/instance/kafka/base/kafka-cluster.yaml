@@ -103,7 +103,7 @@ spec:
     rack:
       topologyKey: "topology.kubernetes.io/zone"
     authorization:
-      type: {}
+      type: simple
       # superUsers:
       #   - "CN=mm-user"
     listeners:

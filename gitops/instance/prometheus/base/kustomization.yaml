@@ -1,13 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
-namespace: kafka-metrics
-
-labels:
-- includeSelectors: false
-  pairs:
-    app: kafka
-
 resources:
   - prometheus-additional-scrape-secret.yaml
   - prometheus-pod-monitor.yaml

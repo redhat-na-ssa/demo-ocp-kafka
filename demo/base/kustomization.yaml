@@ -10,9 +10,9 @@ labels:
       demo: demo-ocp-kafka
 
 resources:
-  - cluster
-  - metrics
   - generator
+  - kafka
+  - metrics
 
 components:
   - ../../gitops/branding

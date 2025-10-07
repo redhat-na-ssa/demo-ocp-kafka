@@ -9,3 +9,4 @@ labels:
 resources:
   - kafka-cluster.yaml
   - kafka-metrics-config.yaml
+  - kafka-nodepool.yaml

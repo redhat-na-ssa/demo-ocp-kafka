@@ -1,0 +1,60 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: controller
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  replicas: 3
+  resources:
+    requests:
+      memory: 8Gi
+      cpu: "2"
+    limits:
+      memory: 8Gi
+      cpu: "4"
+  roles:
+    - controller
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 50Gi
+        kraftMetadata: shared
+        deleteClaim: false
+  template:
+    pod:
+      affinity:
+      topologySpreadConstraints:
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: broker
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  replicas: 3
+  resources:
+    requests:
+      memory: 8Gi
+      cpu: "2"
+    limits:
+      memory: 8Gi
+      cpu: "4"
+  roles:
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 100Gi
+        kraftMetadata: shared
+        deleteClaim: false
+  template:
+    pod:
+      affinity:
+      topologySpreadConstraints:

@@ -8,7 +8,7 @@ spec:
   serviceAccountName: prometheus-server
   podMonitorSelector:
     matchLabels:
-      app: kafka
+      monitor: prometheus
   serviceMonitorSelector: {}
   resources:
     requests:

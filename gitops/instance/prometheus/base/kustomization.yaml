@@ -4,7 +4,8 @@ kind: Component
 labels:
 - includeSelectors: true
   pairs:
-    monitor: kafka
+    # see podMonitorSelector in prometheus CR instance
+    monitor: prometheus
 
 resources:
   - prometheus-additional-scrape-secret.yaml

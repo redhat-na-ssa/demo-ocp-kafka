@@ -13,3 +13,4 @@ resources:
   
 components:
   - ../../../../gitops/instance/prometheus/base
+  - ../../../../gitops/instance/grafana/base

@@ -8,6 +8,3 @@ kind: Kustomization
 
 resources:
   - ../../../../gitops/operators/grafana-operator
-
-components:
-  - ../../../../gitops/instance/grafana/base

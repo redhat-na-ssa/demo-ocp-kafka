@@ -44,4 +44,3 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus-server
-  namespace: kafka-metrics

@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../strimzi
+
+patches:
+  - target:
+      kind: KafkaTopic
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 4
+  - target:
+      kind: KafkaNodePool
+      name: broker
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 4
+      - op: replace
+        path: /spec/template/pod/topologySpreadConstraints/0/maxSkew
+        value: 2
+  - target:
+      kind: KafkaNodePool
+      name: controller
+    patch: |-
+      - op: replace
+        path: /spec/template/pod/topologySpreadConstraints/0/maxSkew
+        value: 2
+  - target:
+      kind: Kafka
+      name: my-cluster
+    patch: |-
+      - op: replace
+        path: /spec/kafka/config
+        value:
+          default.replication.factor: 4
+          min.insync.replicas: 2
+          offsets.topic.replication.factor: 4
+          replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
+          transaction.state.log.min.isr: 2
+          transaction.state.log.replication.factor: 4

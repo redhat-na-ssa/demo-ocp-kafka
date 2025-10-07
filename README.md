@@ -28,11 +28,18 @@ oc -n kafka scale deployment kafka-consumer-perf-test --replicas=1
 oc -n kafka scale deployment kafka-producer-perf-test --replicas=1
 ```
 
-Reset kafka cluster
+Remove Strimzi Demo
 
 ```sh
+# remove kafka cluster
 oc -n kafka delete kafkatopic demo.topic01
 oc delete ns kafka
+
+# remove demo
+oc delete -k demo/strimzi
+
+# remove CRDs
+oc delete crd -l app=strimzi
 ```
 
 ## Links

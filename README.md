@@ -1,4 +1,4 @@
-# Strimzi Demo
+# AMQ Streams Demo
 
 ## Prerequisites - Get a cluster
 
@@ -17,11 +17,11 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 
 ## Set up Cluster
 
-Run Strimzi Demo
+Run AMQ Streams Demo
 
 ```sh
 # deploy demo
-until oc apply -k demo/strimzi; do : ; done
+until oc apply -k demo/streams do : ; done
 ```
 
 ## Scale Consumer / Producer
@@ -40,8 +40,8 @@ oc -n kafka delete kafkatopic demo.topic01
 oc delete ns kafka
 
 # remove demo
-oc delete -k demo/strimzi
 oc delete -k demo/streams
+oc delete -k demo/strimzi
 
 # remove CRDs
 oc delete crd -l app=strimzi

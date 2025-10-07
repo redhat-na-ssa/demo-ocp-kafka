@@ -32,7 +32,7 @@ oc -n kafka scale deployment kafka-consumer-perf-test --replicas=1
 oc -n kafka scale deployment kafka-producer-perf-test --replicas=1
 ```
 
-Remove Demo
+## Remove Demo
 
 ```sh
 # remove kafka cluster

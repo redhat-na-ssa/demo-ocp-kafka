@@ -19,14 +19,11 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 
 ```sh
 # deploy demo
-until oc apply -k demo/on-osd; do : ; done
+until oc apply -k demo/strimzi; do : ; done
 ```
 
 ```sh
-# deploy example
-oc apply -k example/overlays/strimzi
-
-# scale example
+# scale generator
 oc -n strimzi scale deployment kafka-consumer-perf-test --replicas=1
 oc -n strimzi scale deployment kafka-producer-perf-test --replicas=1
 ```

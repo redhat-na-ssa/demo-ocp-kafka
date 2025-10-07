@@ -5,7 +5,6 @@ metadata:
     app.kubernetes.io/managed-by: grafana-operator
     dashboards: strimzi
   name: grafana-service
-  namespace: kafka-metrics
 spec:
   port:
     targetPort: grafana

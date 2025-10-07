@@ -3,10 +3,10 @@ kind: Kustomization
 
 namespace: kafka-metrics
 
-labels:
-- includeSelectors: false
-  pairs:
-    app: kafka
+# labels:
+# - includeSelectors: false
+#   pairs:
+#     app: kafka
 
 resources:
   - ../../../../gitops/operators/prometheus

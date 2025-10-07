@@ -12,7 +12,7 @@ labels:
 resources:
   - banner-demo.yaml
   - metrics
-  - generator/overlays/strimzi-tls
+  - generator
   - ../../gitops/instance/kafka/overlays/default
   - ../../gitops/operators/strimzi-kafka-operator/operator/overlays/stable
 

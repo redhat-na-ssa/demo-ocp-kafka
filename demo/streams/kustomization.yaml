@@ -3,31 +3,28 @@ kind: Kustomization
 
 resources:
   - banner-demo.yaml
-  - namespace.yaml
+  - metrics
+  - generator
+  - ../../gitops/instance/kafka/overlays/default
   - ../../gitops/operators/amq-streams/operator/overlays/stable
-  - ../../gitops/operators/grafana-operator
-  - ../../gitops/operators/prometheus/streams
 
 components:
   - ../../gitops/branding
-  - ../../gitops/instance/grafana/streams
-  - ../../gitops/instance/prometheus/streams
-  - ../../gitops/instance/kafka/overlays/default
 
-patches:
-  - target:
-      kind: OperatorGroup
-      name: grafana-operator
-    patch: |-
-      - op: replace
-        path: /spec/targetNamespaces
-        value:
-          - streams-metrics
-  - target:
-      kind: OperatorGroup
-      name: prometheus
-    patch: |-
-      - op: replace
-        path: /spec/targetNamespaces
-        value:
-          - streams-metrics
+# patches:
+#   - target:
+#       kind: OperatorGroup
+#       name: grafana-operator
+#     patch: |-
+#       - op: replace
+#         path: /spec/targetNamespaces
+#         value:
+#           - streams-metrics
+#   - target:
+#       kind: OperatorGroup
+#       name: prometheus
+#     patch: |-
+#       - op: replace
+#         path: /spec/targetNamespaces
+#         value:
+#           - streams-metrics

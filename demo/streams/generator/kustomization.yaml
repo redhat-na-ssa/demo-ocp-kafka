@@ -3,8 +3,11 @@ kind: Kustomization
 
 namespace: kafka
 
-resources:
-  - ../../base
+components:
+  - ../../../gitops/instance/kafka/components/consumer
+  - ../../../gitops/instance/kafka/components/producer
+  - ../../../gitops/instance/kafka/components/topic
+  - ../../../gitops/instance/kafka/components/tls
 
 patches:
   - target:
@@ -14,15 +17,6 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
-  - target:
-      kind: ConfigMap
-      name: kafka-producer-perf-test-configmap
-    patch: |-
-      - op: replace
-        path: /data/kafka-producer.properties
-        value: |-
-          batch.size=16384
-          compression.type=none
   - target:
       kind: Deployment
       name: kafka-producer-perf-test

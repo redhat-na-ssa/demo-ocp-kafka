@@ -5,6 +5,7 @@ namespace: kafka
 
 components:
   - ../../components/node-anti-affinity
+  - ../../components/topology-spread
   - ../../components/users
 
 resources:

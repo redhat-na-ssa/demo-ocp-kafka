@@ -17,10 +17,14 @@ NOTE: The node sizes below are the **recommended minimum** to select for provisi
 
 ## Set up Cluster
 
+Run Strimzi Demo
+
 ```sh
 # deploy demo
 until oc apply -k demo/strimzi; do : ; done
 ```
+
+## Scale Consumer / Producer
 
 ```sh
 # scale generator
@@ -28,7 +32,7 @@ oc -n kafka scale deployment kafka-consumer-perf-test --replicas=1
 oc -n kafka scale deployment kafka-producer-perf-test --replicas=1
 ```
 
-Remove Strimzi Demo
+Remove Demo
 
 ```sh
 # remove kafka cluster
@@ -37,6 +41,7 @@ oc delete ns kafka
 
 # remove demo
 oc delete -k demo/strimzi
+oc delete -k demo/streams
 
 # remove CRDs
 oc delete crd -l app=strimzi

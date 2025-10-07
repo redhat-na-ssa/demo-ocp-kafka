@@ -6,7 +6,21 @@ resources:
   - ../base
   - ../../gitops/operators/amq-streams/operator/overlays/stable
 
-# patches:
+patches:
+  - target:
+      kind: Deployment
+      name: kafka-consumer-perf-test
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
+  - target:
+      kind: Deployment
+      name: kafka-producer-perf-test
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "registry.redhat.io/amq-streams/kafka-40-rhel9:3.0.1"
 #   - target:
 #       kind: OperatorGroup
 #       name: grafana-operator

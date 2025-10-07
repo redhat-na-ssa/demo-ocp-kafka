@@ -103,9 +103,9 @@ spec:
     rack:
       topologyKey: "topology.kubernetes.io/zone"
     authorization:
-      type: simple
-      superUsers:
-        - "CN=mm-user"
+      type: {}
+      # superUsers:
+      #   - "CN=mm-user"
     listeners:
       - name: plain
         port: 9092

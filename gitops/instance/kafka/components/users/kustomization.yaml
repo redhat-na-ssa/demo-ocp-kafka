@@ -8,3 +8,11 @@ labels:
 
 resources:
   - users.yaml
+
+patches:
+  - target:
+      kind: Kafka
+    patch: |-
+      - op: add
+        path: /spec/kafka/authorization/type
+        value: simple

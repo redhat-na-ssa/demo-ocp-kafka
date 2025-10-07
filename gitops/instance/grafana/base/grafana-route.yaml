@@ -3,7 +3,6 @@ kind: Route
 metadata:
   labels:
     app.kubernetes.io/managed-by: grafana-operator
-    dashboards: strimzi
   name: grafana-service
 spec:
   port:

@@ -1,5 +1,18 @@
 # AMQ Streams Demo
 
+## Overview
+
+This repository provides a complete, production-like demo environment for running Apache Kafka on OpenShift using Red Hat AMQ Streams (Strimzi). It leverages `Kustomize` for modular, reusable Kubernetes manifests and includes scripts for easy setup and teardown.
+
+This repo includes:
+
+- `Kustomize` bases, overlays, and components for Kafka clusters, topics, users, monitoring, and more.
+- Example configurations for deploying Kafka, Grafana, Prometheus, and related operators.
+- Scripts for automated bootstrap and cleanup of the demo environment.
+- Documentation and patches to help you customize and extend the deployment for your own use cases.
+
+This setup is ideal for learning, testing, or demonstrating Kafka and event streaming on OpenShift.
+
 ## Prerequisites - Get a cluster
 
 - OpenShift 4.18+

@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: kafka
 
 components:
+  - ../../components/listeners
   - ../../components/node-anti-affinity
   - ../../components/topology-spread
   - ../../components/users
